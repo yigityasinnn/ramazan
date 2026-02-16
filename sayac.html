@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ramazan Geri Sayım</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .countdown {
+      font-size: 30px;
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      width: 120px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .time-box h2 {
+      margin: 0;
+      font-size: 32px;
+      color: gold;
+    }
+
+    .time-box p {
+      margin: 5px 0 0 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🌙 Ramazan 2026</div>
+  <ul>
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="ramazan.html">Ramazan</a></li>
+    <li><a href="sayac.html">Geri Sayım</a></li>
+    <li><a href="iftar.html">İftar Menüsü</a></li>
+    <li><a href="takvim.html">Takvim</a></li>
+  </ul>
+</nav>
+
+<div class="section">
+  <h1>⏳ Ramazan'a Geri Sayım</h1>
+
+  <div class="countdown">
+    <div class="time-box">
+      <h2 id="days">0</h2>
+      <p>Gün</p>
+    </div>
+
+    <div class="time-box">
+      <h2 id="hours">0</h2>
+      <p>Saat</p>
+    </div>
+
+    <div class="time-box">
+      <h2 id="minutes">0</h2>
+      <p>Dakika</p>
+    </div>
+
+    <div class="time-box">
+      <h2 id="seconds">0</h2>
+      <p>Saniye</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ramazanTarihi = new Date("Feb 19, 2026 00:00:00").getTime();
+
+  const sayac = setInterval(function() {
+
+    const simdi = new Date().getTime();
+    const fark = ramazanTarihi - simdi;
+
+    const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+    const saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+    const saniye = Math.floor((fark % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = gun;
+    document.getElementById("hours").innerHTML = saat;
+    document.getElementById("minutes").innerHTML = dakika;
+    document.getElementById("seconds").innerHTML = saniye;
+
+    if (fark < 0) {
+      clearInterval(sayac);
+      document.querySelector(".countdown").innerHTML =
+        "<h2>🌙 Ramazan Başladı! 🌙</h2>";
+    }
+
+  }, 1000);
+</script>
+
+</body>
+</html>
